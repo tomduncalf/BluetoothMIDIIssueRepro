@@ -13,6 +13,10 @@
 		7338F961246C049000EE5C79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7338F95F246C049000EE5C79 /* Main.storyboard */; };
 		7338F963246C049300EE5C79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7338F962246C049300EE5C79 /* Assets.xcassets */; };
 		7338F966246C049300EE5C79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7338F964246C049300EE5C79 /* LaunchScreen.storyboard */; };
+		7338F970246C070900EE5C79 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7338F96F246C070900EE5C79 /* AudioToolbox.framework */; };
+		7338F972246C084500EE5C79 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7338F971246C084500EE5C79 /* CoreAudio.framework */; };
+		7338F974246C084900EE5C79 /* CoreAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7338F973246C084900EE5C79 /* CoreAudioKit.framework */; };
+		7338F99A246C0B0800EE5C79 /* AKBluetoothMIDIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7338F999246C0B0800EE5C79 /* AKBluetoothMIDIButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,11 @@
 		7338F962246C049300EE5C79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7338F965246C049300EE5C79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7338F967246C049300EE5C79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7338F96D246C070900EE5C79 /* SendMIDIBluetoothTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SendMIDIBluetoothTest.entitlements; sourceTree = "<group>"; };
+		7338F96F246C070900EE5C79 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7338F971246C084500EE5C79 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		7338F973246C084900EE5C79 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
+		7338F999246C0B0800EE5C79 /* AKBluetoothMIDIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AKBluetoothMIDIButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +40,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7338F972246C084500EE5C79 /* CoreAudio.framework in Frameworks */,
+				7338F974246C084900EE5C79 /* CoreAudioKit.framework in Frameworks */,
+				7338F970246C070900EE5C79 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +54,7 @@
 			children = (
 				7338F958246C049000EE5C79 /* SendMIDIBluetoothTest */,
 				7338F957246C049000EE5C79 /* Products */,
+				7338F96E246C070900EE5C79 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +69,7 @@
 		7338F958246C049000EE5C79 /* SendMIDIBluetoothTest */ = {
 			isa = PBXGroup;
 			children = (
+				7338F96D246C070900EE5C79 /* SendMIDIBluetoothTest.entitlements */,
 				7338F959246C049000EE5C79 /* AppDelegate.swift */,
 				7338F95B246C049000EE5C79 /* SceneDelegate.swift */,
 				7338F95D246C049000EE5C79 /* ViewController.swift */,
@@ -63,8 +77,19 @@
 				7338F962246C049300EE5C79 /* Assets.xcassets */,
 				7338F964246C049300EE5C79 /* LaunchScreen.storyboard */,
 				7338F967246C049300EE5C79 /* Info.plist */,
+				7338F999246C0B0800EE5C79 /* AKBluetoothMIDIButton.swift */,
 			);
 			path = SendMIDIBluetoothTest;
+			sourceTree = "<group>";
+		};
+		7338F96E246C070900EE5C79 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7338F973246C084900EE5C79 /* CoreAudioKit.framework */,
+				7338F971246C084500EE5C79 /* CoreAudio.framework */,
+				7338F96F246C070900EE5C79 /* AudioToolbox.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +166,7 @@
 				7338F95E246C049000EE5C79 /* ViewController.swift in Sources */,
 				7338F95A246C049000EE5C79 /* AppDelegate.swift in Sources */,
 				7338F95C246C049000EE5C79 /* SceneDelegate.swift in Sources */,
+				7338F99A246C0B0800EE5C79 /* AKBluetoothMIDIButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +310,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SendMIDIBluetoothTest/SendMIDIBluetoothTest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TKQQG6PP9C;
 				INFOPLIST_FILE = SendMIDIBluetoothTest/Info.plist;
@@ -302,6 +329,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SendMIDIBluetoothTest/SendMIDIBluetoothTest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TKQQG6PP9C;
 				INFOPLIST_FILE = SendMIDIBluetoothTest/Info.plist;
