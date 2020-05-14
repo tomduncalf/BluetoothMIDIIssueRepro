@@ -36,12 +36,18 @@ class ViewController: UIViewController {
     }
     
     @IBAction func sendMessageTouchDown(_ sender: Any) {
-        sendMidiMessage()
+        sendNoteOn()
+    }
+
+    @IBAction func startSendingMessages1HzTouchDown(_ sender: Any) {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            self.sendNoteOn()
+        }
     }
     
-    @IBAction func startSendingMessagesTouchDown(_ sender: Any) {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-            self.sendMidiMessage()
+    @IBAction func startSendingMessages2HzTouchDown(_ sender: Any) {
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+            self.sendNoteOn()
         }
     }
     
@@ -49,34 +55,54 @@ class ViewController: UIViewController {
         timer?.invalidate()
     }
     
-    func sendMidiMessage(_ count: Int = 1) {
+    @IBAction func sendSysexTouchDown(_ sender: Any) {
+        sendSysex()
+    }
+    
+    func sendNoteOn() {
+        // From https://github.com/chrisjmendez/swift-exercises/blob/548c40ffe13ab826eea620a6075606716be2a12f/Music/MIDI/Playgrounds/SimpleNote.playground/Contents.swift
+        var packet1: MIDIPacket = MIDIPacket()
+            packet1.timeStamp = 0
+            packet1.length = 3
+            packet1.data.0 = 0x90 + 0 // Note On event channel 1
+            packet1.data.1 = 0x3C // Note C3
+            packet1.data.2 = 100 // Velocity
+        var packetList: MIDIPacketList = MIDIPacketList(numPackets: 1, packet: packet1)
 
-
-//        var builder = MIDIPacketList.Builder(byteSize: count * 3)
-//        builder.append(timestamp: 0, data: [0x90, 0x3C, 100])
-//        builder.withUnsafeMutableMIDIPacketListPointer { packetList in
-//            print ("*** Device before sending: " + String(MIDIGetDestination(midiDestinationIndex)))
-//
-//            if (MIDIGetDestination(midiDestinationIndex) != 0) {
-//                print ("*** Sending MIDI")
-//                MIDISend(outputPort, dest, &packetList)
-//            }
-//        }
-
-            // From https://github.com/chrisjmendez/swift-exercises/blob/548c40ffe13ab826eea620a6075606716be2a12f/Music/MIDI/Playgrounds/SimpleNote.playground/Contents.swift
-        var packets: [MIDIPacket] = []
+        print ("*** Device before sending: " + String(MIDIGetDestination(midiDestinationIndex)))
         
-        for i in 1...count {
-            var packet: MIDIPacket = MIDIPacket()
-            packet.timeStamp = 0
-            packet.length = 3
-            packet.data.0 = 0x90 // Note On event channel 1
-            packet.data.1 = 0x3C // Note C3
-            packet.data.2 = 100 // Velocity
-            packets.append(packet)
+        if (MIDIGetDestination(midiDestinationIndex) != 0) {
+            print ("*** Sending MIDI")
+            MIDISend(outputPort, dest, &packetList)
         }
+    }
+    
+    func sendSysex() {
+        // From https://github.com/chrisjmendez/swift-exercises/blob/548c40ffe13ab826eea620a6075606716be2a12f/Music/MIDI/Playgrounds/SimpleNote.playground/Contents.swift
+        var packet1: MIDIPacket = MIDIPacket()
+            packet1.timeStamp = 0
+            packet1.length = 11
+
+            packet1.data.0 = 0xF0
+            packet1.data.1 = 0x00
+            packet1.data.2 = 0x21
+            packet1.data.3 = 0x10
+            packet1.data.4 = 0x77
+            packet1.data.5 = 0x2F
+            packet1.data.6 = 0x01
+            packet1.data.7 = 0x03
+            packet1.data.8 = 0x00
+            packet1.data.9 = 0x63
+            packet1.data.10 = 0xF7
         
-        var packetList: MIDIPacketList = MIDIPacketList(numPackets: UInt32(count), packet: packets[0])
+        var packetList: MIDIPacketList = MIDIPacketList(numPackets: 1, packet: packet1)
+
+        print ("*** Device before sending: " + String(MIDIGetDestination(midiDestinationIndex)))
+        
+        if (MIDIGetDestination(midiDestinationIndex) != 0) {
+            print ("*** Sending MIDI")
+            MIDISend(outputPort, dest, &packetList)
+        }
     }
     
     // Copied from AudioKit
