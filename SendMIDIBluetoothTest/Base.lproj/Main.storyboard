@@ -29,11 +29,35 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NWq-Y0-RVK">
-                                <rect key="frame" x="143" y="177" width="131" height="30"/>
+                                <rect key="frame" x="148" y="177" width="122" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Send test message"/>
+                                <state key="normal" title="Send test note on"/>
                                 <connections>
-                                    <action selector="testTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="w5e-8e-Ysn"/>
+                                    <action selector="sendMessageTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="x8D-ZG-bhx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbS-VP-PTQ">
+                                <rect key="frame" x="113" y="215" width="192" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Start sending 10hz note ons"/>
+                                <connections>
+                                    <action selector="startSendingMessagesTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="rWL-Q6-AUL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uaL-yB-PQV">
+                                <rect key="frame" x="132" y="253" width="154" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Stop sending note ons"/>
+                                <connections>
+                                    <action selector="stopSendingMessagesTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="b54-I6-JRP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Epj-m9-Mzg">
+                                <rect key="frame" x="115" y="291" width="188" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Send test multiple note ons"/>
+                                <connections>
+                                    <action selector="sendMessageTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="2lA-YO-OFF"/>
                                 </connections>
                             </button>
                         </subviews>
