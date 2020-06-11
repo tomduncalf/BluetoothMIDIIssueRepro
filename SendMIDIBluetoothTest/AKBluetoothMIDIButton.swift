@@ -36,6 +36,8 @@ public class AKBluetoothMIDIButton: UIButton {
 
     /// Pull up a popover controller when the button is released
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print ("COUNT \(realSuperView?.subviews.count ?? -1)")
+        
         super.touchesEnded(touches, with: event)
 
         let bluetoothMIDIViewController = AKBTMIDICentralViewController()

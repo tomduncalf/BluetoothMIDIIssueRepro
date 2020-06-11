@@ -8,14 +8,19 @@
 
 import UIKit
 import CoreMIDI
+import CoreBluetooth
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CBCentralManagerDelegate {
     var midiDestinationIndex = 1
     
     var midiClient: MIDIClientRef = 0
+    public var inputPort = MIDIPortRef()
     public var outputPort = MIDIPortRef()
     var dest: MIDIEndpointRef = 0
     var timer: Timer?
+    
+    var cbManager: CBCentralManager?
+    var p: CBPeripheral?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +31,56 @@ class ViewController: UIViewController {
         print("*** MIDI notify, messageID = \(message.pointee.messageID.rawValue)")
     }
     
+    let midiReadProc: MIDIReadProc = { messageList, readProcRefCon, refCon in
+        print ("MSG: \(messageList.pointee.numPackets)")
+    }
+
+    @IBAction func disposeMidiSession(_ sender: Any) {
+//        MIDIPortDispose(outputPort);
+//        MIDIClientDispose(midiClient);
+        
+        MIDIRestart()
+    }
+    
     @IBAction func setupTouchDown(_ sender: Any) {
         MIDIClientCreate("MidiTestClient" as CFString, midiNotifyProc, nil, &midiClient);
         MIDIOutputPortCreate(midiClient, "MidiTest_OutPort" as CFString, &outputPort);
-        
+        MIDIInputPortCreate(midiClient, "MidiTest_Input" as CFString, midiReadProc, nil, &inputPort)
+    }
+    
+    @IBAction func setupMidiConnection(_ sender: Any) {
         print ("*** Number of destinations: " + String(MIDIGetNumberOfDestinations()))
-        dest = MIDIGetDestination(midiDestinationIndex) // Change this if your Bluetooth MIDI device is not at index 1
+        dest = MIDIGetDestination(MIDIGetNumberOfDestinations() - 1) // Change this if your Bluetooth MIDI device is not at index 1
         print ("*** Using device: " + getMIDIObjectStringProperty(ref: dest, property: kMIDIPropertyDisplayName))
+        
+        let source = MIDIGetSource(MIDIGetNumberOfDestinations() - 1) // Change this if your Bluetooth MIDI device is not at index 1
+        let s = MIDIPortConnectSource(inputPort, source, nil)
+        
+        for i in 0..<MIDIGetNumberOfDestinations() {
+            let thisDest = MIDIGetDestination(i)
+            print ("Destination \(i): \(getMIDIObjectStringProperty(ref: thisDest, property: kMIDIPropertyDisplayName))")
+        }
+    }
+    
+    @IBAction func scan(_ sender: Any) {
+        print ("Scan")
+        cbManager = CBCentralManager()
+        cbManager?.delegate = self
+    }
+    
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        print("State \(central.state)")
+        cbManager?.scanForPeripherals(withServices: [CBUUID(string: "03B80E5A-EDE8-4B33-A751-6CE34EC4C700")], options: nil)
+    }
+    
+func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        print("Discovered \(peripheral.name)")
+        p = peripheral
+        cbManager?.connect(peripheral)
+    }
+    
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        print ("Disconnected: \(peripheral.name)")
     }
     
     @IBAction func sendMessageTouchDown(_ sender: Any) {
@@ -46,7 +94,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startSendingMessages2HzTouchDown(_ sender: Any) {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
             self.sendNoteOn()
         }
     }
