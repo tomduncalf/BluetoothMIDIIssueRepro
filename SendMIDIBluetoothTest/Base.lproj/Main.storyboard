@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -16,80 +16,80 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zVi-6p-2FI" customClass="AKBluetoothMIDIButton" customModule="SendMIDIBluetoothTest" customModuleProvider="target">
-                                <rect key="frame" x="109" y="101" width="196" height="30"/>
+                                <rect key="frame" x="101" y="139" width="212" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Connect to Bluetooth device"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gb9-AS-0pz">
-                                <rect key="frame" x="148" y="170" width="129" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Setup midi session"/>
-                                <connections>
-                                    <action selector="setupTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="GB2-an-cS7"/>
-                                </connections>
+                                <state key="normal" title="2. Connect to Bluetooth device"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NWq-Y0-RVK">
-                                <rect key="frame" x="151" y="260" width="122" height="30"/>
+                                <rect key="frame" x="146" y="215" width="139" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Send test note on"/>
+                                <state key="normal" title="4. Send test note on"/>
                                 <connections>
                                     <action selector="sendMessageTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="x8D-ZG-bhx"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NW6-ek-UCz">
-                                <rect key="frame" x="121" y="298" width="183" height="30"/>
+                                <rect key="frame" x="124" y="401" width="183" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Start sending 1hz note ons"/>
                                 <connections>
                                     <action selector="startSendingMessages1HzTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="vr1-24-LIO"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbS-VP-PTQ">
-                                <rect key="frame" x="120" y="336" width="185" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Start sending 2hz note ons"/>
-                                <connections>
-                                    <action selector="startSendingMessages2HzTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="9hK-pK-gcH"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uaL-yB-PQV">
-                                <rect key="frame" x="135" y="374" width="154" height="30"/>
+                                <rect key="frame" x="138" y="325" width="154" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Stop sending note ons"/>
                                 <connections>
                                     <action selector="stopSendingMessagesTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="b54-I6-JRP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Epj-m9-Mzg">
-                                <rect key="frame" x="162" y="412" width="101" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Send test syex"/>
-                                <connections>
-                                    <action selector="sendSysexTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="Bqm-sU-ugL"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MtK-Sc-gXf">
-                                <rect key="frame" x="136" y="208" width="154" height="30"/>
+                                <rect key="frame" x="127" y="177" width="171" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Setup midi connection"/>
+                                <state key="normal" title="3. Setup midi connection"/>
                                 <connections>
                                     <action selector="setupMidiConnection:" destination="BYZ-38-t0r" eventType="touchDown" id="9CU-o4-Kmf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkN-Vk-VPn">
-                                <rect key="frame" x="195" y="545" width="35" height="30"/>
+                                <rect key="frame" x="127" y="469" width="169" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Scan"/>
+                                <state key="normal" title="CBCentralManager Scan"/>
                                 <connections>
                                     <action selector="scan:" destination="BYZ-38-t0r" eventType="touchDown" id="vpo-Z1-htK"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPx-h6-40i">
-                                <rect key="frame" x="135" y="139" width="144" height="30"/>
+                                <rect key="frame" x="172" y="507" width="81" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Dispose midi session"/>
+                                <state key="normal" title="MIDIRestart"/>
                                 <connections>
-                                    <action selector="disposeMidiSession:" destination="BYZ-38-t0r" eventType="touchDown" id="Nge-gw-ZgC"/>
+                                    <action selector="midiRestart:" destination="BYZ-38-t0r" eventType="touchDown" id="Nge-gw-ZgC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gb9-AS-0pz">
+                                <rect key="frame" x="140" y="101" width="144" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="1. Setup midi session"/>
+                                <connections>
+                                    <action selector="setupTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="GB2-an-cS7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qOD-Oj-J1Z">
+                                <rect key="frame" x="118" y="363" width="185" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Start sending 2hz note ons"/>
+                                <connections>
+                                    <action selector="startSendingMessages2HzTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="T0Q-Ql-9A8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbS-VP-PTQ">
+                                <rect key="frame" x="110" y="253" width="202" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="5. Start sending 5hz note ons"/>
+                                <connections>
+                                    <action selector="startSendingMessages5HzTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="Tb7-Mc-z6J"/>
                                 </connections>
                             </button>
                         </subviews>

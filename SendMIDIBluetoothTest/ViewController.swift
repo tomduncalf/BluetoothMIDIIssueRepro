@@ -35,10 +35,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate {
         print ("MSG: \(messageList.pointee.numPackets)")
     }
 
-    @IBAction func disposeMidiSession(_ sender: Any) {
-//        MIDIPortDispose(outputPort);
-//        MIDIClientDispose(midiClient);
-        
+    @IBAction func midiRestart(_ sender: Any) {
         MIDIRestart()
     }
     
@@ -46,6 +43,8 @@ class ViewController: UIViewController, CBCentralManagerDelegate {
         MIDIClientCreate("MidiTestClient" as CFString, midiNotifyProc, nil, &midiClient);
         MIDIOutputPortCreate(midiClient, "MidiTest_OutPort" as CFString, &outputPort);
         MIDIInputPortCreate(midiClient, "MidiTest_Input" as CFString, midiReadProc, nil, &inputPort)
+        
+        print ("*** MIDI session setup")
     }
     
     @IBAction func setupMidiConnection(_ sender: Any) {
@@ -62,27 +61,6 @@ class ViewController: UIViewController, CBCentralManagerDelegate {
         }
     }
     
-    @IBAction func scan(_ sender: Any) {
-        print ("Scan")
-        cbManager = CBCentralManager()
-        cbManager?.delegate = self
-    }
-    
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        print("State \(central.state)")
-        cbManager?.scanForPeripherals(withServices: [CBUUID(string: "03B80E5A-EDE8-4B33-A751-6CE34EC4C700")], options: nil)
-    }
-    
-func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        print("Discovered \(peripheral.name)")
-        p = peripheral
-        cbManager?.connect(peripheral)
-    }
-    
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        print ("Disconnected: \(peripheral.name)")
-    }
-    
     @IBAction func sendMessageTouchDown(_ sender: Any) {
         sendNoteOn()
     }
@@ -93,18 +71,20 @@ func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPerip
         }
     }
     
-    @IBAction func startSendingMessages2HzTouchDown(_ sender: Any) {
+    @IBAction func startSendingMessages5HzTouchDown(_ sender: Any) {
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            self.sendNoteOn()
+        }
+    }
+    
+    @IBAction func startSendingMessages2HzTouchDown(_ sender: Any) {
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
             self.sendNoteOn()
         }
     }
     
     @IBAction func stopSendingMessagesTouchDown(_ sender: Any) {
         timer?.invalidate()
-    }
-    
-    @IBAction func sendSysexTouchDown(_ sender: Any) {
-        sendSysex()
     }
     
     func sendNoteOn() {
@@ -125,32 +105,24 @@ func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPerip
         }
     }
     
-    func sendSysex() {
-        // From https://github.com/chrisjmendez/swift-exercises/blob/548c40ffe13ab826eea620a6075606716be2a12f/Music/MIDI/Playgrounds/SimpleNote.playground/Contents.swift
-        var packet1: MIDIPacket = MIDIPacket()
-            packet1.timeStamp = 0
-            packet1.length = 11
-
-            packet1.data.0 = 0xF0
-            packet1.data.1 = 0x00
-            packet1.data.2 = 0x21
-            packet1.data.3 = 0x10
-            packet1.data.4 = 0x77
-            packet1.data.5 = 0x2F
-            packet1.data.6 = 0x01
-            packet1.data.7 = 0x03
-            packet1.data.8 = 0x00
-            packet1.data.9 = 0x63
-            packet1.data.10 = 0xF7
-        
-        var packetList: MIDIPacketList = MIDIPacketList(numPackets: 1, packet: packet1)
-
-        print ("*** Device before sending: " + String(MIDIGetDestination(midiDestinationIndex)))
-        
-        if (MIDIGetDestination(midiDestinationIndex) != 0) {
-            print ("*** Sending MIDI")
-            MIDISend(outputPort, dest, &packetList)
-        }
+    @IBAction func scan(_ sender: Any) {
+        cbManager = CBCentralManager()
+        cbManager?.delegate = self
+    }
+    
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        print("State \(central.state)")
+        cbManager?.scanForPeripherals(withServices: [CBUUID(string: "03B80E5A-EDE8-4B33-A751-6CE34EC4C700")], options: nil)
+    }
+    
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        print("Discovered \(peripheral.name)")
+        p = peripheral
+        cbManager?.connect(peripheral)
+    }
+    
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        print ("Disconnected: \(peripheral.name)")
     }
     
     // Copied from AudioKit
